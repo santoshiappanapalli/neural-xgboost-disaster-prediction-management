@@ -1,0 +1,912 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Environs - Environmental & Nature Website Template</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <style>
+    /* -----------------------------
+       Base / Typography (same theme as Home/About/Contact)
+       ----------------------------- */
+    :root {
+      --primary: #0d6efd;
+      --accent1: #4e73df;
+      --accent2: #1cc88a;
+      --muted: #6c757d;
+      --card-bg: rgba(255, 255, 255, 0.98);
+      --glass: rgba(255, 255, 255, 0.06);
+      --header-gradient-start: rgb(255, 128, 0);
+      --header-gradient-end: #004085;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Montserrat", "Roboto", "Raleway", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #222;
+      background: linear-gradient(180deg, #fbfdff 0%, #f6f9fc 100%);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* -----------------------------
+       Header (match Home page)
+       ----------------------------- */
+    .header {
+      background: linear-gradient(90deg, var(--header-gradient-start), var(--header-gradient-end));
+      color: #fff;
+      position: sticky;
+      display: block;
+      width: 100%;
+      padding: 12px 0;
+      top: 0;
+      z-index: 1030;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+    }
+
+    .header.scrolled {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-weight: 700;
+    }
+
+    .my-icon {
+      width: 42px;
+      height: 42px;
+      color: var(--primary);
+      flex: 0 0 42px;
+    }
+
+    .sitename {
+      font-size: 1.25rem;
+      margin: 0;
+      color: #fff;
+      letter-spacing: .2px;
+    }
+
+    .navmenu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .navmenu ul li {
+      display: inline-block;
+    }
+
+    .navmenu a {
+      color: #fff !important;
+      font-weight: 500;
+      padding: 8px 6px;
+      border-radius: 6px;
+      transition: all .18s ease-in-out;
+    }
+
+    .navmenu a.active,
+    .navmenu a:hover {
+      color: #ffd700 !important;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      transform: translateY(-2px);
+      box-shadow: none;
+    }
+
+    .mobile-nav-toggle {
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    /* -----------------------------
+       Page Title
+       ----------------------------- */
+    .page-title {
+      padding: 28px 0;
+    }
+
+    .light-background {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      margin: 20px 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    /* -----------------------------
+       Hero / Login area
+       ----------------------------- */
+    .hero {
+      padding: 48px 0;
+      position: relative;
+      overflow: visible;
+    }
+
+    .dark-background {
+      background: linear-gradient(180deg, rgba(4, 18, 84, 0.04), rgba(255, 255, 255, 0));
+      border-radius: 12px;
+      padding-bottom: 34px;
+    }
+
+    /* Reuse admin css classes but ensure responsive layout */
+    .container-login100 {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .wrap-login100 {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.77));
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 18px 40px rgba(16, 24, 40, 0.06);
+      backdrop-filter: blur(6px);
+    }
+
+    .login100-form-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent1);
+      display: block;
+      text-align: center;
+    }
+
+    /* Buttons glow */
+    .btn-glow {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: #fff;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(78, 115, 223, 0.12);
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Input look aligned to admin main.css but ensure visibility */
+    .input100 {
+      width: 100%;
+      padding: 12px 40px 12px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(16, 24, 40, 0.06);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .wrap-input100 {
+      position: relative;
+    }
+
+    .symbol-input100 {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    /* Right image card */
+    .login100-pic {
+      border-radius: 12px;
+      padding: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(250, 250, 250, 0.9));
+      box-shadow: 0 12px 30px rgba(16, 24, 40, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Footer (match Home page) */
+
+
+    /* Scroll Top */
+    .scroll-top {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: var(--accent1);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(78, 115, 223, 0.14);
+      z-index: 60;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 991.98px) {
+      .sitename {
+        font-size: 1.05rem;
+      }
+
+      .navmenu ul {
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .container-login100 {
+        gap: 16px;
+      }
+
+      .wrap-login100,
+      .login100-pic {
+        width: 100%;
+        max-width: 100%;
+        padding: 16px;
+      }
+    }
+
+    /* -----------------------------
+       Dual-dot / AI-style pulse preloader
+       ----------------------------- */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 2200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(7, 10, 25, 0.35);
+    }
+
+    .dual-pulse {
+      width: 80px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dual-pulse .dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      box-shadow: 0 6px 18px rgba(78, 115, 223, 0.16);
+      animation: pulse 1s infinite ease-in-out;
+      transform-origin: center;
+    }
+
+    .dual-pulse .dot:nth-child(2) {
+      animation-delay: 0.18s;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.6;
+        filter: blur(0px);
+      }
+
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+        filter: blur(0);
+      }
+
+      100% {
+        transform: scale(0.6);
+        opacity: 0.6;
+      }
+    }
+
+    /* -----------------------------
+       Centered success overlay (fade in/out)
+       ----------------------------- */
+    .overlay-center {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2300;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .32s ease;
+    }
+
+    .overlay-center.show {
+      pointer-events: auto;
+      opacity: 1;
+      transition: opacity .24s ease;
+    }
+
+    .overlay-card {
+      background: rgba(255, 255, 255, 0.96);
+      padding: 28px 30px;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(2, 6, 23, 0.35);
+      text-align: center;
+      max-width: 420px;
+      width: calc(100% - 40px);
+      transform: translateY(0);
+      animation: overlayPop .28s ease;
+    }
+
+    @keyframes overlayPop {
+      from {
+        transform: translateY(10px) scale(0.98);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .overlay-card h3 {
+      margin: 0 0 6px;
+      color: var(--accent1);
+      font-weight: 800;
+    }
+
+    .overlay-card p {
+      margin: 0 0 12px;
+      color: #334155;
+    }
+
+    .overlay-success-dot {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 12px;
+      box-shadow: 0 12px 30px rgba(78, 115, 223, 0.16);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Spinner Start -->
+  <div id="spinner"
+    class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-primary" role="status"></div>
+  </div>
+  <!-- Spinner End -->
+
+
+  <!-- Navbar start -->
+  <div class="container-fluid fixed-top px-0">
+    <div class="container px-0">
+      <div class="topbar">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-8">
+            <div class="topbar-info d-flex flex-wrap">
+              <a href="#" class="text-light me-4"><i
+                  class="fas fa-envelope text-white me-2"></i>santoshiappanapalli@gmail.com</a>
+              <a href="#" class="text-light"><i class="fas fa-phone-alt text-white me-2"></i>+91 7658930954</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="topbar-icon d-flex align-items-center justify-content-end">
+              <a href="#" class="btn-square text-white me-2"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="btn-square text-white me-2"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="btn-square text-white me-2"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="btn-square text-white me-2"><i class="fab fa-pinterest"></i></a>
+              <a href="#" class="btn-square text-white me-0"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-light bg-light navbar-expand-xl">
+        <a href="{% url 'home' %}" class="navbar-brand ms-3">
+          <h1 class="text-primary display-5">Disasters</h1>
+        </a>
+        <button class="navbar-toggler py-2 px-3 me-3" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse">
+          <span class="fa fa-bars text-primary"></span>
+        </button>
+        <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
+          <div class="navbar-nav ms-auto">
+            <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
+            <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+            <a href="{% url 'service' %}" class="nav-item nav-link ">Services</a>
+            <a href="{% url 'causes' %}" class="nav-item nav-link">Causes</a>
+            <a href="{% url 'adminLogin' %}" class="nav-item nav-link active ">Admin</a>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">User</a>
+              <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                <a href="{% url 'userLogin' %}" class="dropdown-item">Login</a>
+                <a href="{% url 'userLogin' %}" class="dropdown-item">Register</a>
+              </div>
+            </div>
+            <a href="{% url 'contact'%}" class="nav-item nav-link">Contact</a>
+          </div>
+          <div class="d-flex align-items-center flex-nowrap pt-xl-0" style="margin-left: 15px;">
+            <a href="{% url 'userLogin' %}" class="btn-hover-bg btn btn-primary text-white py-2 px-4 me-3">Register</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!-- Navbar End -->
+
+  <!-- Header Start -->
+  <div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+      <h3 class="text-white display-3 mb-4">Admin Login</h1>
+        <p class="fs-5 text-white mb-4">Prepare Today Because Tomorrow Could Be an Emergency</p>
+        <ol class="breadcrumb justify-content-center mb-0">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Pages</a></li>
+          <li class="breadcrumb-item active text-white">Services</li>
+        </ol>
+    </div>
+  </div>
+  <!-- Header End -->
+
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero section dark-background pt-5 ">
+    <div id="hero-carousel" class="carousel mx-auto carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+      <div class="container position-relative">
+        <div class="limiter">
+          <div class="container-login100 px-auto"
+            style="display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;">
+
+            <!-- Form Section (Left) -->
+            <div class="wrap-login100 pe-0 animate__animated animate__fadeInLeft"
+              style="flex: 1; min-width: 300px; padding: 20px;">
+              <form class="login100-form validate-form" action="{% url 'admin_login' %}" method="post"
+                id="adminLoginForm">
+                {% csrf_token %}
+                <span class="login100-form-title mb-4">Admin Login</span>
+
+                <div class="wrap-input100 validate-input mb-3">
+                  <input class="input100" style="padding-left: 70px;" type="email" name="email" id="email"
+                    placeholder="Email" required>
+                  <span class="focus-input100"></span>
+                  <span class="symbol-input100">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </div>
+
+                <div class="wrap-input100 validate-input mb-3">
+                  <input class="input100" style="padding-left: 70px;" type="password" name="password" id="password"
+                    placeholder="Password" required>
+                  <span class="focus-input100"></span>
+                  <span class="symbol-input100">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                </div>
+
+                <!-- OTP Input -->
+                <div class="wrap-input100 validate-input mb-3" id="otpSection" style="display: none;">
+                  <input class="input100" style="padding-left: 70px;" type="text" id="otp" name="otp"
+                    placeholder="Enter OTP">
+                  <span class="focus-input100"></span>
+                  <span class="symbol-input100">
+                    <i class="fa fa-key"></i>
+                  </span>
+                </div>
+
+                <!-- Send OTP -->
+                <div class="container-login100-form-btn mb-3" id="sendOtpBtnContainer">
+                  <button type="button" class="login100-form-btn btn btn-glow w-100" onclick="sendOtp()">
+                    Send OTP
+                  </button>
+                </div>
+
+                <!-- Verify OTP -->
+                <div class="container-login100-form-btn mb-3" id="verifyOtpBtnContainer" style="display: none;">
+                  <button type="button" class="login100-form-btn btn btn-glow w-100" onclick="verifyOtp()">
+                    Verify OTP
+                  </button>
+                </div>
+
+                <!-- Login -->
+                <div class="container-login100-form-btn mb-3" id="loginBtnContainer" style="display: none;">
+                  <button type="submit" class="login100-form-btn btn btn-glow w-100">
+                    Login
+                  </button>
+                </div>
+
+                <div class="text-center p-t-12">
+                  <span class="txt1">Forgot</span>
+                  <a class="txt2" href="#">Username / Password?</a>
+                </div>
+              </form>
+            </div>
+
+            <!-- Image Section -->
+            <div class="login100-pic js-tilt animate__animated animate__fadeInRight" data-tilt
+              style="flex: 1; min-width: 300px; max-width: 400px; display: flex; align-items: center; justify-content: center;">
+              <img style="width: 100%; max-width: 400px; height: auto;"
+                src="https://cdni.iconscout.com/illustration/premium/thumb/user-login-illustration-svg-download-png-5902661.png"
+                alt="Admin Login Illustration">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer Start -->
+    <div class="container-fluid footer bg-dark text-body py-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item">
+                        <h4 class="mb-4 text-white">Project Newsletter</h4>
+                        <p class="mb-4">Stay informed about our AI-driven disaster prediction project that combines deep
+                            learning and advanced analytics to forecast natural disasters. Our solution improves
+                            prediction accuracy, supports emergency response planning,
+                            and strengthens disaster risk management through intelligent and data-driven insights.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="mb-4 text-white">Our Services</h4>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Disaster Risk Prediction</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Real-Time Data Analysis</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Neural-XGBoost Model Analytics</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Hazard Classification System</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Disaster Trend Visualization</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Emergency Response Insights</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item">
+                        <h4 class="mb-4 text-white">Our Gallery</h4>
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-1.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-1.jpg' %}"
+                                            data-lightbox="footerGallery-1" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-2.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-2.jpg' %}"
+                                            data-lightbox="footerGallery-2" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-3.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-3.jpg' %}"
+                                            data-lightbox="footerGallery-3" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-4.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-4.jpg' %}"
+                                            data-lightbox="footerGallery-4" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-5.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-5.jpg' %}"
+                                            data-lightbox="footerGallery-5" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-6.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-6.jpg' %}"
+                                            data-lightbox="footerGallery-6" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-4 text-center text-md-start mb-md-0">
+                    <span class="text-body"><a href="https://pragati.ac.in/"><i
+                                class="fas fa-copyright text-light me-2"></i>Pragati Engineering College</a>, All right
+                        reserved.</span>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <a href="#" class="btn-hover-color btn-square text-white me-2"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn-hover-color btn-square text-white me-2"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn-hover-color btn-square text-white me-2"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn-hover-color btn-square text-white me-2"><i
+                                class="fab fa-pinterest"></i></a>
+                        <a href="#" class="btn-hover-color btn-square text-white me-0"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center text-md-end text-body">
+                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                    Designed By <a class="border-bottom">SantoshiAppanapalli</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function sendOtp() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        Swal.fire({ icon: "warning", title: "Required", text: "Enter email and password first." });
+        return;
+      }
+
+      showPreloader(true);
+
+      fetch("/admin/check-credentials/?email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password))
+        .then(res => res.text())
+        .then(result => {
+          if (result === "valid") {
+            fetch("/admin/send-otp/?email=" + encodeURIComponent(email))
+              .then(res => res.text())
+              .then(r => {
+                showPreloader(false);
+                if (r === "sent") {
+                  Swal.fire({ icon: "success", title: "OTP Sent", text: "OTP sent to your email.", timer: 2000, showConfirmButton: false });
+                  document.getElementById("otpSection").style.display = "block";
+                  document.getElementById("sendOtpBtnContainer").style.display = "none";
+                  document.getElementById("verifyOtpBtnContainer").style.display = "block";
+                }
+              });
+          } else {
+            showPreloader(false);
+            Swal.fire({ icon: "error", title: "Invalid Login", text: "Incorrect email or password." });
+          }
+        });
+    }
+
+
+    function verifyOtp() {
+      const email = document.getElementById("email").value.trim();
+
+      if (!email || !email.includes("@")) {
+        Swal.fire({
+          icon: "error",
+          title: "Invalid Email",
+          text: "Please enter a valid email address (example@gmail.com)"
+        });
+        return;
+      }
+
+      const otp = document.getElementById("otp").value.trim();
+
+      if (!otp) {
+        Swal.fire({
+          icon: "warning",
+          title: "OTP Required",
+          text: "Please enter the OTP sent to your email.",
+        });
+        return;
+      }
+
+      showPreloader(true);
+
+      fetch("/admin/verify-otp/?email=" + encodeURIComponent(email) + "&otp=" + encodeURIComponent(otp))
+        .then(response => response.text())
+        .then(result => {
+          showPreloader(false);
+
+          if (result === "verified") {
+
+            Swal.fire({
+              icon: "success",
+              title: "OTP Verified!",
+              text: "OTP verified. Please click Login to continue.",
+              timer: 1800,
+              showConfirmButton: false
+            });
+
+            // Unlock login button only
+            document.getElementById("verifyOtpBtnContainer").style.display = "none";
+            document.getElementById("otpSection").style.display = "none";
+            document.getElementById("loginBtnContainer").style.display = "block";
+
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Invalid OTP",
+              text: "Incorrect or expired OTP. Please try again.",
+            });
+          }
+        })
+        .catch(() => {
+          showPreloader(false);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Something went wrong while verifying OTP.",
+          });
+        });
+    }
+
+
+    function showPreloader(show) {
+      const pre = document.getElementById('preloader');
+      if (!pre) return;
+      pre.style.display = show ? 'flex' : 'none';
+    }
+
+    const overlay = document.getElementById('successOverlay');
+    const overlayCloseBtn = document.getElementById('overlayCloseBtn');
+
+    function showOverlay(title, message, autoHideMs) {
+      document.getElementById('overlayTitle').textContent = title || 'Success';
+      document.getElementById('overlayMessage').textContent = message || '';
+      overlay.classList.add('show');
+      overlay.setAttribute('aria-hidden', 'false');
+      if (autoHideMs && autoHideMs > 0) setTimeout(hideOverlay, autoHideMs);
+    }
+
+    function hideOverlay() {
+      overlay.classList.remove('show');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+    overlayCloseBtn && overlayCloseBtn.addEventListener('click', hideOverlay);
+
+    document.getElementById('adminLoginForm').addEventListener('submit', function () {
+      showPreloader(true);
+    });
+
+    var scrollTopBtn = document.getElementById('scroll-top');
+    if (scrollTopBtn) {
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) {
+          scrollTopBtn.style.opacity = '1';
+          scrollTopBtn.style.pointerEvents = 'auto';
+        } else {
+          scrollTopBtn.style.opacity = '0';
+          scrollTopBtn.style.pointerEvents = 'none';
+        }
+      });
+      scrollTopBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.AOS) AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 80 });
+    });
+  </script>
+  <span id="djangoSuccess" style="display:none;">{{ success }}</span>
+  <span id="djangoError" style="display:none;">{{ error }}</span>
+
+
+  <!-- Django server-side alerts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const successMsg = document.getElementById("djangoSuccess")?.innerText.trim();
+      const errorMsg = document.getElementById("djangoError")?.innerText.trim();
+
+      if (successMsg) {
+        showOverlay("Success!", successMsg, 2800);
+      }
+
+      if (errorMsg) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops!",
+          text: errorMsg,
+          confirmButtonText: "Retry"
+        });
+      }
+    });
+  </script>
+
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+  <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+
+
+  <!-- Template Javascript -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

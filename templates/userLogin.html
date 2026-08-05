@@ -1,0 +1,849 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Environs - Environmental & Nature Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+        <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <style>
+    :root {
+      --primary: #0d6efd;
+      --accent1: #4e73df;
+      --accent2: #1cc88a;
+      --header-start: rgb(255, 128, 0);
+      --header-end: #004085;
+      --footer-start: var(--accent1);
+      --footer-end: #0b5ed7;
+      --glass: rgba(255,255,255,0.85);
+    }
+
+    html,body { height:100%; margin:0; font-family: "Montserrat","Roboto","Raleway", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+    body { background: linear-gradient(180deg,#fbfdff 0%, #f6f9fc 100%); color:#222; }
+
+    /* Header (same gradient & styles you requested) */
+    .header {
+      background: linear-gradient(90deg, var(--header-start), var(--header-end));
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      padding: 12px 0;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      transition: background-color .3s ease, box-shadow .3s ease;
+    }
+    .header.scrolled { box-shadow: 0 4px 12px rgba(0,0,0,0.12); background-color:#084298; }
+    .logo { display:flex; align-items:center; gap:.5rem; text-decoration:none; }
+    .logo .my-icon { width:42px; height:42px; color: #fff; flex:0 0 42px; }
+    .sitename { margin:0; font-size:1.25rem; color: #fff; font-weight:700; }
+
+    nav.navmenu ul { list-style:none; margin:0; padding:0; display:flex; gap:16px; align-items:center; }
+    nav.navmenu a { color:#fff; font-weight:600; text-decoration:none; padding:8px 8px; border-radius:6px; }
+    nav.navmenu a.active, nav.navmenu a:hover { background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff; box-shadow:0 6px 16px rgba(78,115,223,0.14); transform:translateY(-1px); }
+
+    .mobile-nav-toggle { font-size:1.2rem; color:#fff; display:none; cursor:pointer; }
+
+    @media (max-width: 991.98px) {
+      .navmenu ul { gap:10px; }
+      .mobile-nav-toggle { display:inline-block; }
+    }
+
+    /* Page title */
+    .page-title { padding:28px 0; background: transparent; }
+    .page-title .light-background { /* kept for compatibility */ }
+    .page-title h1 { margin:0; color:#0b1220; font-weight:700; }
+
+    .breadcrumbs ol { list-style:none; padding:0; margin:0; display:flex; gap:8px; color:#64748b; }
+    .breadcrumbs a { color:#64748b; text-decoration:none; }
+
+    /* 3D Flip card container - modernized but matches previous visual theme */
+    .card-3d-wrap {
+      perspective: 1200px;
+      width: 760px;
+      max-width: calc(100% - 40px);
+      margin: 0 auto;
+    }
+    .card-3d-wrapper {
+      position: relative;
+      width: 100%;
+      height: auto;
+      transform-style: preserve-3d;
+      transition: transform 700ms cubic-bezier(.2,.8,.2,1);
+      display:flex;
+      gap: 24px;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    /* Checkbox flip toggle (hidden) */
+    .checkbox { display:none; }
+    /* When checked, flip the wrapper */
+    .checkbox:checked ~ .card-3d-wrap .card-3d-wrapper { transform: rotateY(-180deg); }
+
+    .card-front, .card-back {
+      width: 360px;
+      min-height: 520px;
+      background: linear-gradient(135deg, #ffffff, #f8f9fa);
+      border-radius: 12px;
+      backface-visibility: hidden;
+      box-shadow: 0 12px 32px rgba(16,24,40,0.08);
+      padding: 22px;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content:flex-start;
+    }
+
+    .card-front { transform: rotateY(0deg); }
+    .card-back  { transform: rotateY(180deg); position:absolute; left:0; top:0; }
+
+    /* When wrapper flips, show back side properly (rotate the tot wrapper) */
+    .card-3d-wrapper .card-back { transform: rotateY(180deg); }
+
+    /* content inside forms */
+    .section { width:100%; }
+    .form-style { height:44px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); padding:8px 12px; }
+    .input-icon { font-size:1.05rem; opacity:.8; }
+
+    .btn { border-radius:10px; padding:10px 14px; font-weight:700; }
+    .btn-info { background: linear-gradient(90deg,var(--accent1),var(--accent2)); border: none; color: #fff; }
+    .btn-success { background:#1cc88a; border:none; color:#fff; }
+    .btn-warning { background:#f59e0b; border:none; color:#fff; }
+
+    .shadow-sm { box-shadow: 0 8px 20px rgba(16,24,40,0.06); }
+
+    .form-image img { max-width:100%; height:auto; }
+
+   
+    
+    /* Preloader and Dual-dot spinner */
+    #preloader { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background: rgba(7,10,20,0.45); z-index:2000; }
+    .dual-dot {
+      width:80px; height:20px; display:flex; align-items:center; justify-content:center; gap:14px;
+    }
+    .dual-dot .dot {
+      width:18px; height:18px; border-radius:50%;
+      background: linear-gradient(90deg,var(--accent1),var(--accent2));
+      box-shadow: 0 8px 20px rgba(78,115,223,0.18);
+      animation: dualPulse 1s infinite ease-in-out;
+    }
+    .dual-dot .dot.second { animation-delay: .35s; background: linear-gradient(90deg,var(--header-end),var(--accent1)); }
+
+    @keyframes dualPulse {
+      0% { transform: scale(0.7); opacity: 0.45; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.7); opacity: 0.45; }
+    }
+
+    /* Centered fade overlay (success/info) */
+    .center-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2100;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+    .center-overlay.show { pointer-events: auto; opacity: 1; }
+    .center-overlay .card {
+      min-width: 280px;
+      max-width: 90%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: 0 20px 60px rgba(2,6,23,0.35);
+      text-align:center;
+      transform: translateY(-6px);
+      animation: overlayPop .36s ease both;
+    }
+    @keyframes overlayPop {
+      from { transform: translateY(8px) scale(.98); opacity:0; }
+      to   { transform: translateY(0) scale(1); opacity:1; }
+    }
+    .center-overlay .icon { font-size: 28px; margin-bottom:8px; display:block; }
+    .center-overlay.success .icon { color: #10b981; } /* green */
+    .center-overlay.error   .icon { color: #ef4444; } /* red */
+    .center-overlay.info    .icon { color: #0ea5e9; } /* blue */
+
+    /* small responsiveness */
+    @media (max-width: 900px) {
+      .card-3d-wrap { width: 100%; }
+      .card-front, .card-back { width: 320px; min-height: auto; }
+      .card-3d-wrapper { gap:16px; justify-content:center; }
+    }
+
+    /* small helper text styles to match previous pages */
+    .text-light { color: rgba(255,255,255,0.95); }
+    .text-primary { color: var(--accent1); font-weight:700; }
+	
+
+	body {
+	  	  background-attachment: fixed;
+	  min-height: 100vh;
+	}
+
+	.glass-bg {
+	  background: rgba(255, 255, 255, 0.15);
+	  backdrop-filter: blur(12px);
+	  border: 1px solid rgba(255, 255, 255, 0.25);
+	  transition: all 0.5s ease;
+	}
+
+	.toggle-bell {
+	  background: rgb(192, 192, 192);
+	  border-radius: 50px;
+	  padding: 10px 25px;
+	  color: white;
+	  display: inline-flex;
+	  align-items: center;
+	  cursor: pointer;
+	  transition: background 0.3s ease;
+	}
+	.toggle-bell:hover {
+	  background: rgb(64, 128, 128);
+	}
+	.toggle-bell i {
+	  font-size: 1.4rem;
+	  margin-right: 8px;
+	  animation: ring 1.5s ease infinite;
+	}
+	@keyframes ring {
+	  0% { transform: rotate(0); }
+	  10% { transform: rotate(15deg); }
+	  20% { transform: rotate(-10deg); }
+	  30% { transform: rotate(5deg); }
+	  40% { transform: rotate(-5deg); }
+	  50% { transform: rotate(0); }
+	  100% { transform: rotate(0); }
+	}
+
+	.auth-form {
+	  display: none;
+	  animation: fadeIn 0.5s ease forwards;
+	}
+	.auth-form.active {
+	  display: block !important;
+	}
+
+	@keyframes fadeIn {
+	  from { opacity: 0; transform: translateY(10px); }
+	  to { opacity: 1; transform: translateY(0); }
+	}
+
+
+  </style>
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar start -->
+        <div class="container-fluid fixed-top px-0">
+            <div class="container px-0">
+                <div class="topbar">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-8">
+                            <div class="topbar-info d-flex flex-wrap">
+                               <a href="#" class="text-light me-4"><i class="fas fa-envelope text-white me-2"></i>santoshiappanapalli@gmail.com</a>
+                                <a href="#" class="text-light"><i class="fas fa-phone-alt text-white me-2"></i>+91 7658930954</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="topbar-icon d-flex align-items-center justify-content-end">
+                                <a href="#" class="btn-square text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="btn-square text-white me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="btn-square text-white me-2"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="btn-square text-white me-2"><i class="fab fa-pinterest"></i></a>
+                                <a href="#" class="btn-square text-white me-0"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="navbar navbar-light bg-light navbar-expand-xl">
+                    <a href="{% url 'home' %}" class="navbar-brand ms-3">
+                        <h1 class="text-primary display-5">Disasters</h1>
+                    </a>
+                    <button class="navbar-toggler py-2 px-3 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars text-primary"></span>
+                    </button>
+                    <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto">
+                            <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
+                            <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                            <a href="{% url 'service' %}" class="nav-item nav-link ">Services</a>
+                            <a href="{% url 'causes' %}" class="nav-item nav-link">Causes</a>
+                            
+                            <a href="{% url 'adminLogin' %}" class="nav-item nav-link ">Admin</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">User</a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <a href="{% url 'userLogin' %}" class="dropdown-item">Login</a>
+                                    <a href="{% url 'userLogin' %}" class="dropdown-item">Register</a>                                  
+                                </div>
+                            </div>
+                            <a href="{% url 'contact'%}" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <div class="d-flex align-items-center flex-nowrap pt-xl-0" style="margin-left: 15px;">
+                            <a href="{% url 'userLogin' %}" class="btn-hover-bg btn btn-primary text-white py-2 px-4 me-3">Register</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">User Register / Login</h1>
+                <p class="fs-5 text-white mb-4">Prepare Today Because Tomorrow Could Be an Emergency</p>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active text-white">Services</li>
+                </ol>    
+            </div>
+        </div>
+        <!-- Header End -->
+
+         <!-- 3D Flip Login/Register -->
+	<section class="py-5">
+	  <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+
+	    <div class="card p-4 shadow-lg rounded-4 glass-bg position-relative" id="authCard" style="max-width: 900px; width: 100%;">
+	      <div class="row align-items-center">
+	        
+	        <!-- IMAGE SECTION -->
+	        <div class="col-lg-6 text-center mb-4 mb-lg-0" id="authImage">
+				<p style="font-weight: bold;">Click on Bell icon to Login/Register</p>
+				<img
+	            src="https://cdni.iconscout.com/illustration/premium/thumb/login-page-illustration-svg-download-png-3783954.png"
+	            alt="Login Image"
+	            class="img-fluid rounded-3 shadow-lg"
+	            id="authImageSrc"
+	            style="max-width: 400px; animation: float 3s ease-in-out infinite;"
+	          >
+	        </div>
+
+	        <!-- FORM SECTION -->
+	        <div class="col-lg-6">
+	          
+	          <!-- Toggle switch -->
+	          <div class="toggle-wrapper text-center mb-4">
+	            <div class="toggle-bell" id="toggleBell">
+	              <i class="bi bi-bell-fill text text-primary"></i>
+	              <span id="toggleText" class="ms-2 fw-bold text-white">Registration Mode</span>
+	            </div>
+	          </div>
+
+	          <!-- LOGIN FORM -->
+	          <form id="loginForm" action="{% url 'user_login' %}" method="post" class="auth-form active" novalidate>
+{% csrf_token %}
+                <h4 class="mb-4 text-center text-dark fw-bold">Log In</h4>
+
+                <div class="form-group position-relative mb-3">
+                <i class="bi bi-envelope position-absolute" style="left:10px; top:50%; transform:translateY(-50%); color:#555;"></i>
+                <input type="email" name="email" id="loginEmail" class="form-control" style="padding-left:50px;" placeholder="Your Email" required>
+                </div>
+
+                <div class="form-group position-relative mb-3">
+                <i class="bi bi-lock position-absolute" style="left:10px; top:50%; transform:translateY(-50%); color:#555;"></i>
+                <input type="password" name="password" id="loginPassword" class="form-control" style="padding-left:50px;" placeholder="Your Password" required>
+                </div>
+
+                <div class="form-group position-relative mb-3" id="loginOtpSection" style="display:none;">
+                <i class="bi bi-key position-absolute" style="left:10px; top:50%; transform:translateY(-50%); color:#555;"></i>
+                <input type="text" id="loginOtp" class="form-control" style="padding-left:50px;" placeholder="Enter OTP">
+                </div>
+
+                <button type="button" id="loginSendOtp" class="btn btn-info w-100 mb-2" onclick="sendOtp('login')">Send OTP</button>
+                <button type="button" id="loginVerifyOtp" class="btn btn-warning w-100 mb-2" onclick="verifyOtp('login')" style="display:none;">Verify OTP</button>
+                <button type="submit" id="loginSubmit" class="btn btn-success w-100" style="display:none;">Submit</button>
+                </form>
+
+	          <!-- REGISTER FORM -->
+	          <form id="registerForm" action="{% url 'user_register' %}" method="post" class="auth-form" style="display:none;" novalidate>
+            {% csrf_token %}
+            <h4 class="mb-4 text-center text-dark fw-bold">Register</h4>
+
+            <div class="form-group position-relative mb-3">
+            <i class="bi bi-person position-absolute" style="left:10px; top:50%; transform:translateY(-50%); color:#555;"></i>
+            <input type="text" name="name" class="form-control" style="padding-left:50px;" placeholder="Enter Full Name" required>
+            </div>
+
+            <div class="form-group position-relative mb-3">
+            <i class="bi bi-envelope position-absolute" style="left:10px; top:50%; transform:translateY(-50%); color:#555;"></i>
+            <input type="email" id="registerEmail" name="email" class="form-control" style="padding-left:50px;" placeholder="Enter Email" required>
+            </div>
+
+            <div class="form-group position-relative mb-3">
+            <i class="bi bi-phone position-absolute" style="left:10px; top:50%; transform:translateY(-50%); color:#555;"></i>
+            <input type="text" name="mobile" class="form-control" style="padding-left:50px;" placeholder="Enter Mobile" required>
+            </div>
+
+            <div class="form-group position-relative mb-3">
+            <i class="bi bi-lock position-absolute" style="left:10px; top:50%; transform:translateY(-50%); color:#555;"></i>
+            <input type="password" name="password" class="form-control" style="padding-left:50px;" placeholder="Enter Password" required>
+            </div>
+
+            <div class="form-group position-relative mb-3" id="registerOtpSection" style="display:none;">
+            <i class="bi bi-key position-absolute" style="left:10px; top:50%; transform:translateY(-50%); color:#555;"></i>
+            <input type="text" id="registerOtp" class="form-control" style="padding-left:50px;" placeholder="Enter OTP">
+            </div>
+
+            <button type="button" id="registerSendOtp" class="btn btn-info w-100 mb-2" onclick="sendOtp('register')">Send OTP</button>
+            <button type="button" id="registerVerifyOtp" class="btn btn-warning w-100 mb-2" onclick="verifyOtp('register')" style="display:none;">Verify OTP</button>
+            <button type="submit" id="registerSubmit" class="btn btn-success w-100" style="display:none;">Submit</button>
+            </form>
+	        </div>
+	      </div>
+	    </div>
+
+	  </div>
+	</section>
+
+	<style>
+	@keyframes float {
+	  0%, 100% { transform: translateY(0); }
+	  50% { transform: translateY(-10px); }
+	}
+	</style>
+
+
+
+        <!-- Footer Start -->
+    <div class="container-fluid footer bg-dark text-body py-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item">
+                        <h4 class="mb-4 text-white">Project Newsletter</h4>
+                        <p class="mb-4">Stay informed about our AI-driven disaster prediction project that combines deep
+                            learning and advanced analytics to forecast natural disasters. Our solution improves
+                            prediction accuracy, supports emergency response planning,
+                            and strengthens disaster risk management through intelligent and data-driven insights.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="mb-4 text-white">Our Services</h4>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Disaster Risk Prediction</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Real-Time Data Analysis</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Neural-XGBoost Model Analytics</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Hazard Classification System</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Disaster Trend Visualization</a>
+                        <a href=""><i class="fas fa-angle-right me-2"></i> Emergency Response Insights</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item">
+                        <h4 class="mb-4 text-white">Our Gallery</h4>
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-1.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-1.jpg' %}"
+                                            data-lightbox="footerGallery-1" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-2.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-2.jpg' %}"
+                                            data-lightbox="footerGallery-2" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-3.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-3.jpg' %}"
+                                            data-lightbox="footerGallery-3" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-4.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-4.jpg' %}"
+                                            data-lightbox="footerGallery-4" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-5.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-5.jpg' %}"
+                                            data-lightbox="footerGallery-5" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="footer-gallery">
+                                    <img src="{% static 'img/gallery-footer-6.jpg' %}" class="img-fluid w-100" alt="">
+                                    <div class="footer-search-icon">
+                                        <a href="{% static 'img/gallery-footer-6.jpg' %}"
+                                            data-lightbox="footerGallery-6" class="my-auto"><i
+                                                class="fas fa-search-plus text-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-4 text-center text-md-start mb-md-0">
+                    <span class="text-body"><a href="https://pragati.ac.in/"><i
+                                class="fas fa-copyright text-light me-2"></i>Pragati Engineering College</a>, All right
+                        reserved.</span>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <a href="#" class="btn-hover-color btn-square text-white me-2"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn-hover-color btn-square text-white me-2"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn-hover-color btn-square text-white me-2"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn-hover-color btn-square text-white me-2"><i
+                                class="fab fa-pinterest"></i></a>
+                        <a href="#" class="btn-hover-color btn-square text-white me-0"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center text-md-end text-body">
+                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                    Designed By <a class="border-bottom">SantoshiAppanapalli</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+        <script>
+  // ========== INITIAL PAGE SETUP ==========
+  
+
+  // ========== OVERLAY POPUP ==========
+  function showOverlay(message, type = 'success', timeout = 2000) {
+    let overlay = document.getElementById('centerOverlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'centerOverlay';
+      overlay.className = 'center-overlay';
+      overlay.innerHTML = `
+        <div id="overlayIcon"></div>
+        <div id="overlayMessage" class="fw-bold mt-2"></div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    const icon = document.getElementById('overlayIcon');
+    const msg = document.getElementById('overlayMessage');
+    overlay.className = 'center-overlay ' + (type === 'error' ? 'error' : (type === 'info' ? 'info' : 'success'));
+    icon.innerHTML = (type === 'error')
+      ? '<i class="bi bi-x-circle-fill"></i>'
+      : (type === 'info')
+        ? '<i class="bi bi-info-circle-fill"></i>'
+        : '<i class="bi bi-check-circle-fill"></i>';
+    msg.textContent = message;
+
+    overlay.classList.add('show');
+    setTimeout(() => overlay.classList.remove('show'), timeout);
+  }
+
+  // ========== SEND OTP ==========
+  function sendOtp(type) {
+
+  // ================= LOGIN =================
+  if (type === "login") {
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+
+    if (email === "" || password === "") {
+      Swal.fire({ icon: "warning", title: "Required", text: "Enter Email & Password" });
+      return;
+    }
+
+    fetch(`/user/check-login/?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`)
+      .then(r => r.text())
+      .then(res => {
+        if (res !== "valid") {
+          Swal.fire({ icon: "error", title: "Invalid", text: "Incorrect Email or Password" });
+        } else {
+          sendOtpNow(email, type);
+        }
+      });
+  }
+
+  // ================= REGISTER =================
+  else {
+
+    const form = document.getElementById("registerForm");
+
+    const name = form.querySelector('input[name="name"]').value.trim();
+    const email = document.getElementById("registerEmail").value.trim();
+    const mobile = form.querySelector('input[name="mobile"]').value.trim();
+    const password = form.querySelector('input[name="password"]').value.trim();
+
+    if (name === "" || email === "" || mobile === "" || password === "") {
+      Swal.fire({ icon: "warning", title: "Fill All Fields" });
+      return;
+    }
+
+    fetch(`/user/check-register/?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&mobile=${encodeURIComponent(mobile)}&password=${encodeURIComponent(password)}`)
+      .then(r => r.text())
+      .then(res => {
+        if (res === "empty") {
+          Swal.fire({ icon: "warning", title: "Fill All Fields" });
+        }
+        else if (res === "exists") {
+          Swal.fire({ icon: "error", title: "Email Exists" });
+        }
+        else {
+          sendOtpNow(email, type);
+        }
+      });
+  }
+}
+
+
+// ================= SEND OTP =================
+function sendOtpNow(email, type) {
+  fetch("/user/send-otp/?email=" + encodeURIComponent(email))
+    .then(r => r.text())
+    .then(res => {
+      if (res === "sent") {
+        Swal.fire({ icon: "success", title: "OTP Sent to your Email" });
+
+        document.getElementById(type + 'SendOtp').style.display = 'none';
+        document.getElementById(type + 'OtpSection').style.display = 'block';
+        document.getElementById(type + 'VerifyOtp').style.display = 'block';
+      } else {
+        Swal.fire({ icon: "error", title: "OTP Failed", text: "Email sending failed!" });
+      }
+    });
+}
+
+
+// ================= VERIFY OTP =================
+function verifyOtp(type) {
+
+  const email = (type === 'login')
+    ? document.getElementById("loginEmail").value.trim()
+    : document.getElementById("registerEmail").value.trim();
+
+  const otp = (type === 'login')
+    ? document.getElementById("loginOtp").value.trim()
+    : document.getElementById("registerOtp").value.trim();
+
+  if (otp === "") {
+    Swal.fire({ icon: 'warning', title: 'OTP Required', text: 'Please enter the OTP.' });
+    return;
+  }
+
+  fetch(`/user/verify-otp/?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`)
+    .then(r => r.text())
+    .then(res => {
+
+      if (res === "verified") {
+        Swal.fire({ icon: 'success', title: 'OTP Verified' });
+
+        document.getElementById(type + 'VerifyOtp').style.display = 'none';
+        document.getElementById(type + 'OtpSection').style.display = 'none';
+        document.getElementById(type + 'Submit').style.display = 'block';
+
+      } else {
+        Swal.fire({ icon: 'error', title: 'Invalid OTP', text: 'Wrong OTP!' });
+      }
+    });
+}
+
+
+  // ========== OPTIONAL FORM FEEDBACK ==========
+  document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    loginForm?.addEventListener('submit', function () {
+      showOverlay('Logging in...', 'info', 1200);
+    });
+
+    registerForm?.addEventListener('submit', function () {
+      showOverlay('Registering...', 'info', 1200);
+    });
+  });
+  </script>
+ 
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script th:inline="javascript">
+  /*<![CDATA[*/
+      let successMsg = /*[[${success}]]*/ null;
+      let errorMsg = /*[[${error}]]*/ null;
+
+      if (successMsg) {
+          Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: successMsg,
+              confirmButtonColor: '#28a745',
+              timer: 2500
+          });
+      }
+
+      if (errorMsg) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: errorMsg,
+              confirmButtonColor: '#d33',
+              timer: 2500
+          });
+      }
+  /*]]>*/
+
+  const toggleBell = document.getElementById("toggleBell");
+  const toggleText = document.getElementById("toggleText");
+
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+  const authImage = document.getElementById("authImageSrc");
+
+  let isLogin = true;
+
+  // Initial State
+  registerForm.classList.remove("active");
+  registerForm.style.display = "none";
+  loginForm.classList.add("active");
+
+  toggleBell.addEventListener("click", () => {
+    isLogin = !isLogin;
+
+    if (isLogin) {
+      // LOGIN
+      loginForm.style.display = "block";
+      registerForm.style.display = "none";
+
+      loginForm.classList.add("active");
+      registerForm.classList.remove("active");
+
+      toggleText.innerText = "Registration Mode";
+      authImage.src = "https://cdni.iconscout.com/illustration/premium/thumb/login-page-illustration-svg-download-png-3783954.png";
+    } else {
+      // REGISTER
+      registerForm.style.display = "block";
+      loginForm.style.display = "none";
+
+      registerForm.classList.add("active");
+      loginForm.classList.remove("active");
+
+      toggleText.innerText = "Login Mode";
+      authImage.src = "https://cdni.iconscout.com/illustration/premium/thumb/sign-up-illustration-svg-download-png-3783956.png";
+    }
+  });
+</script>
+{% if success %}
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Registration Successful 🎉',
+    text: "{{ success|escapejs }}",
+    confirmButtonColor: '#28a745'
+});
+</script>
+{% endif %}
+
+{% if error %}
+<script>
+Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: "{{ error|escapejs }}",
+    confirmButtonColor: '#d33'
+});
+</script>
+{% endif %}
+
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+        <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+        
+
+        <!-- Template Javascript -->
+        <script src="{% static 'js/main.js' %}"></script>
+
+    </body>
+
+</html>

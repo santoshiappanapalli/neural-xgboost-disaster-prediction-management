@@ -1,0 +1,344 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Disaster Prediction</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="{% static 'user/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user/vendors/css/vendor.bundle.base.css' %}">
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'user/images/favicon.png' %}" />
+  <style>
+    .dropdown-menu-animation {
+      transform: translateY(0);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      display: none;
+      /* Changed from block to none to prevent auto-opening */
+    }
+
+    .dropdown.show .dropdown-menu-animation {
+      opacity: 1;
+      display: block;
+      /* Show only when parent has .show class */
+      transform: translateY(5px);
+    }
+
+    body {
+      background: linear-gradient(135deg, #e3f2fd, #e8f5e9);
+    }
+
+    .prediction-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      transition: 0.3s ease-in-out;
+    }
+
+    .prediction-card:hover {
+      transform: scale(1.005);
+    }
+
+    .card-header-custom {
+      background: linear-gradient(90deg, #4e73df, #1cc88a);
+      color: white;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #37474f;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      border: 1px solid #90caf9;
+      padding: 12px 15px;
+      font-size: 15px;
+      background: #f8faff;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .form-control:focus {
+      border-color: #42a5f5;
+      box-shadow: 0 0 6px rgba(66, 165, 245, 0.5);
+      background: #fff;
+    }
+
+    .btn-predict {
+      background: linear-gradient(90deg, #42a5f5, #26c6da);
+      border: none;
+      border-radius: 30px;
+      color: white;
+      padding: 15px 50px;
+      font-size: 18px;
+      font-weight: 600;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .btn-predict:hover {
+      background: linear-gradient(90deg, #26c6da, #42a5f5);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(66, 165, 245, 0.4);
+      color: white;
+    }
+
+    .note {
+      color: #607d8b;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-scroller d-flex">
+
+    <!-- Sidebar Partial -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color: rgb(64, 128, 128);">
+      <ul class="nav">
+        <li class="nav-item sidebar-category">
+          <p style="font-size: large; color: white; padding: 15px;">User Dashboard</p>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user-dashboard' %}">
+            <i class="mdi mdi-view-quilt menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item sidebar-category">
+          <p style="color: rgba(255,255,255,0.7); padding-left: 15px;">Action</p>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'user_disaster_predict' %}">
+            <i class="mdi mdi-weather-lightning-rainy menu-icon text-light"></i>
+            <span class="menu-title">Disaster Prediction</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content Wrapper -->
+    <div class="container-fluid page-body-wrapper">
+
+      <!-- Navbar Partial -->
+      <nav class="navbar col-lg-12 col-12 px-0 py-0 d-flex flex-row">
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <div class="navbar-brand-wrapper ms-4"></div>
+          <h2 class="font-weight-bold mb-0 d-none d-md-block mt-1">
+            Welcome <span style="color: rgb(255, 128, 0);">{{ request.user.first_name }}</span>
+          </h2>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{% static 'user/images/faces/face1.jpg' %}" alt="profile" class="rounded-circle" width="35"
+                  height="35">
+                <span class="ms-2 d-none d-sm-inline">{{ request.user.first_name }}</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown dropdown-menu-animation"
+                aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="{% url 'userprofile' %}">
+                  <i class="mdi mdi-settings text-primary"></i> My Profile
+                </a>
+                <a class="dropdown-item" href="{% url 'userLogin' %}">
+                  <i class="mdi mdi-logout text-primary"></i> Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Main Panel -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row justify-content-center">
+            <div class="col-lg-11 col-xl-10">
+              <div class="card prediction-card mt-4">
+                <div class="card-header-custom text-center py-4">
+                  <h3 class="fw-bold mb-1">
+                    <i class="mdi mdi-weather-lightning-rainy me-2"></i>Disaster Type Prediction
+                  </h3>
+                  <p class="small mb-0 opacity-75">
+                    Enter environmental and impact data to predict the type of disaster
+                  </p>
+                </div>
+
+                <div class="card-body px-4 px-md-5 py-4">
+                  <!-- Working Form Logic Integrated -->
+                  <form method="post" action="{% url 'prediction_result' %}" id="disasterForm">
+                    {% csrf_token %}
+                    <div class="row g-4">
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Total Deaths</label>
+                        <input type="number" name="total_deaths" class="form-control" placeholder="e.g., 125" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Injured</label>
+                        <input type="number" name="injured" class="form-control" placeholder="e.g., 300" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Total Affected</label>
+                        <input type="number" name="total_affected" class="form-control" placeholder="e.g., 50000"
+                          required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Total Damage (USD)</label>
+                        <input type="number" step="any" name="total_damage" class="form-control"
+                          placeholder="e.g., 2000000" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Magnitude</label>
+                        <input type="number" step="any" name="magnitude" class="form-control" placeholder="e.g., 6.2"
+                          required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Latitude</label>
+                        <input type="number" step="any" name="latitude" class="form-control" placeholder="e.g., 17.38"
+                          required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Longitude</label>
+                        <input type="number" step="any" name="longitude" class="form-control" placeholder="e.g., 78.48"
+                          required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Start Year</label>
+                        <input type="number" name="start_year" class="form-control" placeholder="2024" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>End Year</label>
+                        <input type="number" name="end_year" class="form-control" placeholder="2024" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Start Month</label>
+                        <input type="number" name="start_month" class="form-control" placeholder="1-12" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>End Month</label>
+                        <input type="number" name="end_month" class="form-control" placeholder="1-12" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>CPI</label>
+                        <input type="number" step="any" name="cpi" class="form-control" placeholder="e.g., 75.2" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Disaster Subtype</label>
+                        <input type="text" name="disaster_subtype" class="form-control" placeholder="e.g., Flood" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>Country Code</label>
+                        <input type="text" name="country" class="form-control" placeholder="e.g., IND" required>
+                      </div>
+
+                      <div class="col-md-6 col-lg-4">
+                        <label>ISO Code</label>
+                        <input type="text" name="iso" class="form-control" placeholder="e.g., IND" required>
+                      </div>
+
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center mt-5">
+                      <button type="submit" class="btn btn-predict">
+                        <i class="mdi mdi-magnify me-2"></i> Predict Disaster Type
+                      </button>
+                      <p class="note">
+                        <i class="mdi mdi-shield-check-outline me-1"></i>
+                        Prediction powered by Neural-XGBoost Hybrid Model
+                      </p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between py-2">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a
+                    href="https://pragati.ac.in/" target="_blank">Pragati Engineering College</a> 2025</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Engineered for precision</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{% static 'user/vendors/js/vendor.bundle.base.js' %}"></script>
+
+  <script>
+    document.getElementById("disasterForm").addEventListener("submit", function (e) {
+      let inputs = this.querySelectorAll("input[required]");
+      let empty = false;
+
+      inputs.forEach(function (field) {
+        if (field.value.trim() === "") {
+          empty = true;
+          field.style.borderColor = "#e53935";
+        } else {
+          field.style.borderColor = "#90caf9";
+        }
+      });
+
+      if (empty) {
+        e.preventDefault();
+        Swal.fire({
+          icon: 'warning',
+          title: 'Missing Information',
+          text: 'Please fill in all the required fields to generate a prediction.',
+          confirmButtonColor: '#42a5f5'
+        });
+      }
+    });
+  </script>
+
+  <!-- inject:js -->
+  <script src="{% static 'user/js/off-canvas.js' %}"></script>
+  <script src="{% static 'user/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'user/js/template.js' %}"></script>
+</body>
+
+</html>

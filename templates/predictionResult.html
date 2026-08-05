@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Prediction Result</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="{% static 'user/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user/vendors/css/vendor.bundle.base.css' %}">
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'user/images/favicon.png' %}" />
+  <style>
+    .dropdown-menu-animation {
+      transform: translateY(0);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      display: none;
+    }
+
+    .dropdown.show .dropdown-menu-animation {
+      opacity: 1;
+      display: block;
+      transform: translateY(5px);
+    }
+
+    body {
+      background: linear-gradient(135deg, #e3f2fd, #e8f5e9);
+    }
+
+    .result-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .card-header-custom {
+      background: linear-gradient(90deg, #4e73df, #1cc88a);
+      color: white;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .prediction-output-box {
+      background: #f1f8e9;
+      border: 2px dashed #4caf50;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .table {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+    }
+
+    .table thead {
+      background-color: #f5f5f5;
+    }
+
+    .btn-back {
+      background: linear-gradient(90deg, #42a5f5, #26c6da);
+      border: none;
+      border-radius: 30px;
+      color: white;
+      padding: 12px 35px;
+      font-weight: 600;
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(66, 165, 245, 0.4);
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-scroller d-flex">
+
+    <!-- Sidebar Partial -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color: rgb(64, 128, 128);">
+      <ul class="nav">
+        <li class="nav-item sidebar-category">
+          <p style="font-size: large; color: white; padding: 15px;">User Dashboard</p>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user-dashboard' %}">
+            <i class="mdi mdi-view-quilt menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item sidebar-category">
+          <p style="color: rgba(255,255,255,0.7); padding-left: 15px;">Action</p>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user_disaster_predict' %}">
+            <i class="mdi mdi-weather-lightning-rainy menu-icon text-light"></i>
+            <span class="menu-title">Disaster Prediction</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content Wrapper -->
+    <div class="container-fluid page-body-wrapper">
+
+      <!-- Navbar Partial -->
+      <nav class="navbar col-lg-12 col-12 px-0 py-0 d-flex flex-row">
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <div class="navbar-brand-wrapper ms-4"></div>
+          <h2 class="font-weight-bold mb-0 d-none d-md-block mt-1">
+            Welcome <span style="color: rgb(255, 128, 0);">{{ request.user.first_name }}</span>
+          </h2>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{% static 'user/images/faces/face1.jpg' %}" alt="profile" class="rounded-circle" width="35"
+                  height="35">
+                <span class="ms-2 d-none d-sm-inline">{{ request.user.first_name }}</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown dropdown-menu-animation"
+                aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="{% url 'userprofile' %}">
+                  <i class="mdi mdi-settings text-primary"></i> My Profile
+                </a>
+                <a class="dropdown-item" href="{% url 'userLogin' %}">
+                  <i class="mdi mdi-logout text-primary"></i> Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Main Panel -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row justify-content-center">
+            <div class="col-lg-11 col-xl-10">
+              <div class="card result-card mt-4">
+                <div class="card-header-custom text-center py-4">
+                  <h3 class="fw-bold mb-1">
+                    <i class="mdi mdi-chart-box-outline me-2"></i>Analysis Result
+                  </h3>
+                  <p class="small mb-0 opacity-75">
+                    Detailed prediction report based on your submitted parameters
+                  </p>
+                </div>
+
+                <div class="card-body px-4 px-md-5 py-4">
+
+                  {% if error %}
+                  <div class="alert alert-danger text-center shadow-sm mb-4">
+                    <h5 class="fw-bold"><i class="mdi mdi-alert-circle me-2"></i>Prediction Encountered an Issue</h5>
+                    <p class="mb-0">{{ error }}</p>
+                  </div>
+                  {% endif %}
+
+                  <!-- Prediction Result Section -->
+                  {% if prediction or predicted_disaster %}
+                  <div class="prediction-output-box text-center">
+                    <h5 class="text-uppercase text-muted fw-bold mb-2">The Predicted Disaster is</h5>
+                    <h1 class="display-4 fw-bolder text-success">
+                      {{ prediction }}{{ predicted_disaster }}
+                    </h1>
+                    <p class="mb-0 mt-3 text-secondary">
+                      <i class="mdi mdi-shield-check-outline me-1"></i> Result verified by Hybrid Prediction Engine
+                    </p>
+                  </div>
+                  {% endif %}
+
+                  <!-- Data Summary Table -->
+                  {% if input_data %}
+                  <h5 class="fw-bold text-dark mb-3">
+                    <i class="mdi mdi-database-check text-primary me-2"></i>Input Data Summary
+                  </h5>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th class="ps-4">Feature Parameter</th>
+                          <th class="text-center">Value Provided</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for key, value in input_data.items %}
+                        {% if key != 'csrfmiddlewaretoken' %}
+                        <tr>
+                          <td class="ps-4 text-capitalize fw-medium text-muted">{{ key }}</td>
+                          <td class="text-center fw-bold text-dark">{{ value }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  {% endif %}
+
+                  <!-- Action Button -->
+                  <div class="text-center mt-5 mb-3">
+                    <a href="{% url 'user_disaster_predict' %}" class="btn-back">
+                      <i class="mdi mdi-arrow-left me-2"></i> New Prediction
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between py-2">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a
+                    href="https://pragati.ac.in/" target="_blank">Pragati Engineering College</a> 2025</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Safety through
+                  technology</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{% static 'user/vendors/js/vendor.bundle.base.js' %}"></script>
+
+  <script src="{% static 'user/js/off-canvas.js' %}"></script>
+  <script src="{% static 'user/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'user/js/template.js' %}"></script>
+
+  {% if emailSent %}
+  <script>
+    Swal.fire({
+      title: 'Success!',
+      text: 'The prediction result has been sent to your registered email.',
+      icon: 'success',
+      confirmButtonColor: '#42a5f5'
+    });
+  </script>
+  {% endif %}
+</body>
+
+</html>

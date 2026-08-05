@@ -1,0 +1,425 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description"
+    content="Chameleon Admin is a modern Bootstrap 4 webapp &amp; admin dashboard html template with a large number of components, elegant design, clean and organized code.">
+  <meta name="keywords"
+    content="admin template, Chameleon admin template, dashboard template, gradient admin template, responsive admin template, webapp, eCommerce dashboard, analytic dashboard">
+  <meta name="author" content="ThemeSelect">
+  <title>Admin-Dashboard</title>
+  <link rel="apple-touch-icon" href="theme-assets/images/ico/apple-icon-120.png">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'admin/images/adminlogo.png' %}">
+  <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700"
+    rel="stylesheet">
+  <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
+  <!-- BEGIN VENDOR CSS-->
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/theme-assets/css/vendors.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/theme-assets/vendors/css/charts/chartist.css' %}">
+  <!-- END VENDOR CSS-->
+  <!-- BEGIN CHAMELEON  CSS-->
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/theme-assets/css/app-lite.css' %}">
+  <!-- END CHAMELEON  CSS-->
+  <!-- BEGIN Page Level CSS-->
+  <link rel="stylesheet" type="text/css"
+    href="{% static 'admin/theme-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/theme-assets/css/core/colors/palette-gradient.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/theme-assets/css/pages/dashboard-ecommerce.css' %}">
+  <!-- END Page Level CSS-->
+  <!-- BEGIN Custom CSS-->
+  <!-- END Custom CSS-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+
+<body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click"
+  data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
+
+  <!-- fixed-top-->
+  <nav
+    class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
+
+    <div class="navbar-wrapper">
+      <div class="navbar-container content">
+        <div class="collapse navbar-collapse show" id="navbar-mobile">
+
+          <!-- LEFT SIDE -->
+          <ul class="nav navbar-nav mr-auto float-left align-items-center">
+
+            <li class="nav-item d-block d-md-none">
+              <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#">
+                <i class="ft-menu"></i>
+              </a>
+            </li>
+
+            <li class="nav-item d-none d-md-block">
+              <a class="nav-link nav-link-expand" href="#">
+                <i class="ficon ft-maximize"></i>
+              </a>
+            </li>
+
+            <li class="nav-item dropdown navbar-search">
+              <a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#">
+                <i class="ficon ft-search"></i>
+              </a>
+
+              <ul class="dropdown-menu">
+                <li class="arrow_box">
+                  <form>
+                    <div class="input-group search-box">
+                      <div class="position-relative has-icon-right full-width">
+                        <input class="form-control" id="search" type="text" placeholder="Search here...">
+                        <div class="form-control-position navbar-search-close">
+                          <i class="ft-x"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </li>
+              </ul>
+            </li>
+
+            <!-- ✅ TITLE HERE (BETWEEN SEARCH & FLAGS) -->
+            <li class="nav-item project-title-wrapper">
+              <span style="
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;">
+                NEURAL-XGBOOST: A HYBRID APPROACH FOR DISASTER PREDICTION AND MANAGEMENT
+              </span>
+            </li>
+
+          </ul>
+
+          <ul class="nav navbar-nav float-right">
+            <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag"
+                href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                  class="flag-icon flag-icon-in"></i><span class="selected-language"></span></a>
+              <div class="dropdown-menu" aria-labelledby="dropdown-flag">
+                <div class="arrow_box"><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i>
+                    India</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i>
+                    English</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> Chinese</a><a
+                    class="dropdown-item" href="#"><i class="flag-icon flag-icon-ru"></i> Russian</a><a
+                    class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a><a
+                    class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Spanish</a></div>
+              </div>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav float-right">
+            <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"
+                data-toggle="dropdown"><i class="ficon ft-mail"> </i></a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="arrow_box_right"><a class="dropdown-item" href="#"><i class="ft-book"></i> Read Mail</a><a
+                    class="dropdown-item" href="#"><i class="ft-bookmark"></i> Read Later</a><a class="dropdown-item"
+                    href="#"><i class="ft-check-square"></i> Mark all Read </a></div>
+              </div>
+            </li>
+            <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#"
+                data-toggle="dropdown"> <span class="avatar avatar-online"><img
+                    src="{% static 'admin/images/adminlogo.png' %}" alt="avatar"><i></i></span></a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="avatar avatar-online"><img
+                        src="admin/images/adminlogo.png" alt="avatar"><span
+                        class="user-name text-bold-700 ml-1">Admin</span></span></a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="/adminlogout"><i
+                      class="ft-power"></i> Logout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ////////////////////////////////////////////////////////////////////////////-->
+
+
+  <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true"
+    data-img="{% static 'admin/theme-assets/images/backgrounds/02.jpg' %}">
+    <div class="navbar-header">
+      <ul class="nav navbar-nav flex-row">
+        <li class="nav-item mr-auto"><a class="navbar-brand" href="#"><img class="brand-logo" alt="Chameleon admin logo"
+              src="{% static 'admin/images/adminlogo.png' %}" />
+            <h3 class="brand-text">Admin</h3>
+          </a></li>
+        <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
+      </ul>
+    </div>
+    <div class="main-menu-content">
+      <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+        <li class="active"><a href="{% url 'admin_dashboard' %}"><i class="ft-home"></i><span class="menu-title"
+              data-i18n="">Dashboard</span></a>
+        </li>
+        <li class="nav-item has-sub">
+          <a href="javascript:void(0)">
+            <i class="ft-users"></i>
+            <span class="menu-title">Users</span>
+          </a>
+          <ul class="menu-content">
+            <li>
+              <a class="menu-item" href="/pending_users">
+                <i class="ft-clock text-info"></i>
+                Pending Users
+              </a>
+            </li>
+            <li>
+              <a class="menu-item" href="/accepted_users">
+                <i class="ft-check-circle text-success"></i>
+                Accepted Users
+              </a>
+            </li>
+            <li>
+              <a class="menu-item" href="/rejected_users">
+                <i class="ft-x-circle text-danger"></i>
+                Rejected Users
+              </a>
+            </li>
+
+            <li>
+              <a class="menu-item" href="/users_all">
+                <i class="ft-users text-primary"></i>
+                All Users
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="/admin_upload_dataset">
+            <i class="fa fa-database"></i>
+            <span class="menu-title" data-i18n="">Upload Dataset</span>
+          </a>
+        </li>
+        <li class="nav-item" id="viewDatasetMenu">
+          <a href="/admin_view_dataset">
+            <i class="fa-solid fa-table"></i>
+            <span class="menu-title">View Dataset</span>
+          </a>
+        </li>
+        <!-- 🔹 Proposed Algorithm -->
+        <li class="nav-item has-sub">
+          <a href="javascript:void(0)">
+            <i class="fa fa-brain text-success"></i>
+            <span class="menu-title">Proposed Algor..</span>
+          </a>
+          <ul class="menu-content">
+            <li>
+              <a class="menu-item" href="/admin_run_model">
+                <i class="fa fa-robot text-primary"></i>
+                Neural-XGBoost
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- 🔹 Existing Algorithms -->
+        <li class="nav-item has-sub">
+          <a href="javascript:void(0)">
+            <i class="fa fa-cogs text-info"></i>
+            <span class="menu-title">Existing Alg..</span>
+          </a>
+          <ul class="menu-content">
+
+            <li>
+              <a class="menu-item" href="/run_rf_model">
+                <i class="fa fa-tree text-success"></i>
+                Random Forest
+              </a>
+            </li>
+
+            <li>
+              <a class="menu-item" href="/run_lr_model">
+                <i class="fa fa-balance-scale text-primary"></i>
+                Logistic Regression
+              </a>
+            </li>
+
+            <li>
+              <a class="menu-item" href="/run_svm_model">
+                <i class="fa fa-chart-line text-danger"></i>
+                SVM
+              </a>
+            </li>
+
+            <li>
+              <a class="menu-item" href="/run_knn_model">
+                <i class="fa fa-project-diagram text-warning"></i>
+                KNN
+              </a>
+            </li>
+
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="/graph_analysis">
+            <i class="fa fa-chart-line"></i>
+            <span class="menu-title" data-i18n="">Graph Analysis</span>
+          </a>
+        </li>
+        <!--    <li class=" nav-item"><a href="cards.html"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Cards</span></a>
+          </li>
+          <li class=" nav-item"><a href="buttons.html"><i class="ft-box"></i><span class="menu-title" data-i18n="">Buttons</span></a>
+          </li>
+          <li class=" nav-item"><a href="typography.html"><i class="ft-bold"></i><span class="menu-title" data-i18n="">Typography</span></a>
+          </li>
+          <li class=" nav-item"><a href="tables.html"><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Tables</span></a>
+          </li>
+          <li class=" nav-item"><a href="form-elements.html"><i class="ft-layout"></i><span class="menu-title" data-i18n="">Form Elements</span></a>
+          </li>
+          <li class=" nav-item"><a href="https://themeselection.com/demo/chameleon-admin-template/documentation"><i class="ft-book"></i><span class="menu-title" data-i18n="">Documentation</span></a>
+          </li> -->
+      </ul>
+    </div><!--<a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/" target="_blank">Download PRO!</a>
+      -->
+    <div class="navigation-background"></div>
+  </div>
+
+  <div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-wrapper-before"></div>
+      <div class="content-header row">
+        <h1>Welcome to Dashboard</h1>
+      </div>
+
+
+      <!-- Chart -->
+      <!-- eCommerce statistic -->
+      <div class="row mt-3">
+        <div class="col-12">
+          <div class="card pull-up ecom-card-1 bg-white shadow-lg rounded">
+            <div class="card-content ecom-card2 p-3">
+              <h5 class="text-muted info mb-3">All Users</h5>
+
+
+              <!-- Table only if users exist -->
+              <div class="table-responsive">
+                {% if users %}
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover table-striped mb-0">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Mobile</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for user in users %}
+                      <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.mobile }}</td>
+                        <td>
+                          {% if user.status == 'APPROVED' %}
+                          <span class="badge bg-success text-white">
+                            {{ user.status }}
+                          </span>
+                          {% elif user.status == 'DENIED' %}
+                          <span class="badge bg-danger text-white">
+                            {{ user.status }}
+                          </span>
+                          {% elif user.status == 'PENDING' %}
+                          <span class="badge bg-warning text-white">
+                            {{ user.status }}
+                          </span>
+                          {% endif %}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info text-center">
+                  No users available.
+                </div>
+                {% endif %}
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--/ eCommerce statistic -->
+
+      <!-- Statistics -->
+      <div class="row match-height ">
+        <div class="col-xl-4 col-lg-12">
+
+
+        </div>
+        <div class="col-xl-4 col-lg-12">
+
+
+        </div>
+        <div class="col-xl-4 col-lg-12">
+
+        </div>
+      </div>
+      <!--/ Statistics -->
+    </div>
+  </div>
+  </div>
+
+  <footer class="footer footer-static footer-light navbar-border navbar-shadow">
+    <div class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span
+        class="float-md-left d-block d-md-inline-block">2025 &copy; Copyright <a class="text-bold-800 grey darken-2"
+          href="https://pragati.ac.in/" target="_blank">Pragati Engineering College</a></span>
+      <ul class="list-inline float-md-right d-block d-md-inline-blockd-none d-lg-block mb-0">
+        <li class="list-inline-item"><a class="my-1" href="https://pragati.ac.in/" target="_blank"> More </a></li>
+      </ul>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script th:inline="javascript">
+    let successMsg = /*[[${success} ?: 'null']]*/ 'null';
+    let errorMsg = /*[[${error} ?: 'null']]*/ 'null';
+
+    if (successMsg !== 'null') {
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: successMsg,
+        confirmButtonText: 'OK'
+      });
+    }
+
+    if (errorMsg !== 'null') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: errorMsg,
+        confirmButtonText: 'Retry'
+      });
+    }
+  </script>
+
+  <!-- BEGIN VENDOR JS-->
+  <script src="{% static 'admin/theme-assets/vendors/js/vendors.min.js' %}" type="text/javascript"></script>
+  <!-- BEGIN VENDOR JS-->
+  <!-- BEGIN PAGE VENDOR JS-->
+  <script src="{% static 'admin/theme-assets/vendors/js/charts/chartist.min.js' %}" type="text/javascript"></script>
+  <!-- END PAGE VENDOR JS-->
+  <!-- BEGIN CHAMELEON  JS-->
+  <script src="{% static 'admin/theme-assets/js/core/app-menu-lite.js' %}" type="text/javascript"></script>
+  <script src="{% static 'admin/theme-assets/js/core/app-lite.js' %}" type="text/javascript"></script>
+  <!-- END CHAMELEON  JS-->
+  <!-- BEGIN PAGE LEVEL JS-->
+  <script src="{% static 'admin/theme-assets/js/scripts/pages/dashboard-lite.js' %}" type="text/javascript"></script>
+  <!-- END PAGE LEVEL JS-->
+</body>
+
+</html>
