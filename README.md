@@ -1,164 +1,103 @@
-# Neural XGBoost Disaster Prediction and Management
+# Neural XGBoost: A Hybrid Approach for Disaster Prediction and Management Using Machine Learning
 
-## Overview
-The **Neural XGBoost Disaster Prediction and Management** system is a Django-based web application that predicts disaster types using a hybrid Machine Learning approach combining **Neural Networks** and **XGBoost**. The system analyzes disaster-related data to provide accurate predictions and helps users visualize model performance through graphs and accuracy comparisons.
+##  Overview
+Neural XGBoost Disaster Prediction and Management is a Django-based web application that predicts disaster types using a hybrid Neural Network and XGBoost model. The system performs data preprocessing, model training, prediction, and accuracy evaluation through a user-friendly interface.
 
 ---
 
-## Features
+##  Objectives
 
-- User Registration and Login
-- Secure Authentication
-- Disaster Prediction
+- Predict disaster types using a hybrid Neural Network and XGBoost model.
+- Improve prediction accuracy using data preprocessing and SMOTE.
+- Compare the proposed model with existing machine learning algorithms.
+- Provide a web-based platform for disaster prediction and management.
+
+---
+
+##  Features
+
+### Administrator
+- Login
+- Upload and Manage Dataset
+- Train and Test Machine Learning Models
+- Compare Model Performance
+- View Prediction Results
+- Manage Users
+
+### Remote User
+- Register and Login
 - Dashboard
-- Dataset Upload and Management
-- Data Preprocessing
-- SMOTE for Class Balancing
-- Neural Network + XGBoost Hybrid Model
-- Comparison with Existing Algorithms
-  - Random Forest
-  - Support Vector Machine (SVM)
-  - Logistic Regression
-- Accuracy Comparison
-- Graphical Visualization
-- User Profile Management
+- Disaster Prediction
+- View Prediction Results
+- Manage Profile
 
 ---
 
-## Technologies Used
+##  Technologies Used
 
-### Frontend
-- HTML
-- CSS
-- JavaScript
-- Bootstrap
-
-### Backend
 - Python
 - Django
-
-### Machine Learning
+- HTML, CSS, JavaScript
+- Bootstrap
 - PyTorch
 - XGBoost
 - Scikit-learn
 - Pandas
 - NumPy
-
-### Database
 - SQLite
 
 ---
 
-## Project Structure
+##  Machine Learning Models
 
-```
-Source_Code/
-│
-├── admins/
-├── agriculture_project/
-├── disaster_app/
-├── ml_models/
-├── ml_models1/
-├── ml_models2/
-├── static/
-├── templates/
-├── users/
-├── manage.py
-└── requirements.txt
-```
+### Proposed Model
+- Neural Network + XGBoost
 
----
-
-## Workflow
-
-1. User Login
-2. Dataset Upload
-3. Data Preprocessing
-4. SMOTE for Data Balancing
-5. Feature Extraction using Neural Network
-6. Disaster Prediction using XGBoost
-7. Accuracy Evaluation
-8. Graph Generation
-9. Prediction Result Display
-
----
-
-## Existing Algorithms
-
+### Existing Models
 - Random Forest
 - Support Vector Machine (SVM)
 - Logistic Regression
+- KNN
 
 ---
 
-## Proposed Algorithm
+##  Workflow
 
-- Hybrid Neural Network + XGBoost
-
----
-
-## Dataset
-
-The project uses disaster-related datasets containing environmental and historical information such as rainfall, temperature, humidity, wind speed, and disaster categories.
-
----
-
-## Future Enhancements
-
-- Real-time weather data integration
-- IoT sensor support
-- GIS-based disaster visualization
-- Mobile application support
-- SMS and Email alerts
-- Live disaster monitoring dashboard
+1. User Authentication
+2. Dataset Upload
+3. Data Preprocessing
+4. SMOTE for Class Balancing
+5. Feature Extraction using Neural Network
+6. Disaster Prediction using XGBoost
+7. Model Evaluation and Accuracy Comparison
+8. Display Prediction Results
 
 ---
 
-## Installation
+##  Project Structure
 
-Clone the repository
-
-```bash
-git clone https://github.com/santoshiappanapalli/neural-xgboost-disaster-prediction-management.git
-```
-
-Go to the project directory
-
-```bash
-cd neural-xgboost-disaster-prediction-management
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the project
-
-```bash
-python manage.py runserver
-```
-
-Open your browser
-
-```
-http://127.0.0.1:8000/
-```
+- admins/
+- agriculture_project/
+- disaster_app/
+- ml_models/
+- ml_models1/
+- ml_models2/
+- static/
+- templates/
+- users/
 
 ---
 
-## Author
+##  Author
 
 **Appanapalli Santoshi**
 
-Computer Science Engineering Student
+Bachelor of Technology (Computer Science Engineering)
 
-GitHub:
-https://github.com/santoshiappanapalli
+GitHub: https://github.com/santoshiappanapalli
 
 ---
 
-## License
+## 📄 License
 
-This project is developed for academic and educational purposes.
+This project is developed for academic and educational purposes.and educational purposes.
