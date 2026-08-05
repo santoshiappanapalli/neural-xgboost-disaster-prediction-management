@@ -98,6 +98,6 @@ GitHub: https://github.com/santoshiappanapalli
 
 ---
 
-## 📄 License
+##  License
 
 This project is developed for academic and educational purposes.and educational purposes.
