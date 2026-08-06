@@ -1,0 +1,148 @@
+/* Container & Wrapper */
+.container-login100 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+.card-3d-wrap {
+  width: 420px;
+  perspective: 1500px;
+}
+
+.card-3d-wrapper {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+}
+
+/* Card Styles */
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  padding: 30px;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Form Image */
+.form-image {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-image img {
+  width: 140px;
+  border-radius: 12px;
+}
+
+/* Titles */
+.form-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.login-title { color: #800040; }
+.register-title { color: #28a745; }
+
+/* Form Inputs */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.input-icon {
+  padding: 10px;
+  background: #f0f0f0;
+}
+
+.input-icon i {
+  color: inherit;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  outline: none;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn {
+  background: #800040;
+  color: #fff;
+  border: none;
+}
+
+.login-btn:hover {
+  background: #a00060;
+}
+
+.register-btn {
+  background: #28a745;
+  color: #fff;
+  border: none;
+}
+
+.register-btn:hover {
+  background: #1e7e34;
+}
+
+/* Toggle Text */
+.toggle-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #777;
+}
+
+.toggle-label {
+  cursor: pointer;
+  font-weight: 500;
+  color: inherit;
+}
+.card-3d-wrap {
+    position: relative;
+    z-index: 10; /* higher than background */
+}
+/* Add this to your CSS file */
+.container-login100::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.85); /* semi-transparent white */
+    z-index: -1; /* behind form */
+    border-radius: 20px; /* optional for nicer corners */
+}
+
+
